@@ -4,6 +4,10 @@
 	"description": "Gothic horror / Serial Experiments Lain inspired theme — dark, light, high contrast.",
 	"version": "1.0.0",
 	"publisher": "Haymawon",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Haymawon/lain-theme"
+    },
 	"engines": {
 		"vscode": "^1.50.0"
 	},
