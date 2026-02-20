@@ -44,15 +44,15 @@ Use F5 in VS Code to test, or copy the folder to ~/.vscode/extensions/.
 Colors
 Base palette (12 colors)
 
-Black — #0B0B0F
+Black — (`#0B0B0F`)
 
-Dark purple — #1E1A2B
+Dark purple — (`#1E1A2B`)
 
-Purple — #322A45
+Purple — (`#322A45`)
 
-Light purple — #5E4B73
+Light purple — (`#5E4B73`)
 
-Ghost white — #F0EAF0
+Ghost white — (`#F0EAF0`)
 
 CRT green — #B5E5B5
 
