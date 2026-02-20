@@ -1,0 +1,39 @@
+{
+	"name": "lain-theme",
+	"displayName": "Lain Theme",
+	"description": "Gothic horror / Serial Experiments Lain inspired theme — dark, light, high contrast.",
+	"version": "1.0.0",
+	"publisher": "Haymawon",
+	"engines": {
+		"vscode": "^1.50.0"
+	},
+	"categories": [
+		"Themes"
+	],
+	"contributes": {
+		"themes": [
+			{
+				"label": "Lain Dark",
+				"uiTheme": "vs-dark",
+				"path": "./themes/lain-theme-dark.json"
+			},
+			{
+				"label": "Lain Light",
+				"uiTheme": "vs",
+				"path": "./themes/lain-theme-light.json"
+			},
+			{
+				"label": "Lain High Contrast",
+				"uiTheme": "hc-black",
+				"path": "./themes/lain-theme-high-contrast.json"
+			}
+		]
+	},
+	"scripts": {
+		"build": "node scripts/build.js",
+		"validate": "node scripts/validate.js",
+		"prepackage": "npm run build && npm run validate"
+	},
+	"devDependencies": {},
+	"license": "MIT"
+}
