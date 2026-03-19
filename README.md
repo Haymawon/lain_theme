@@ -1,6 +1,6 @@
 # Lain Theme
 
-Gothic horror / Serial Experiments Lain inspired theme for VS Code.  
+Serial Experiments Lain inspired theme for VS Code.  
 Dark, light, and high-contrast variants.
 
 ---
@@ -32,8 +32,8 @@ Extensions → … → Install from VSIX…
 ## Build from source
 
 ```bash
-git clone https://github.com/yourusername/lain-theme
-cd lain-theme
+git clone https://github.com/Haymawon/lain_theme.git
+cd lain_theme
 ```
 ```bash
 npm install
