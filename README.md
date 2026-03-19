@@ -20,12 +20,13 @@ Dark, light, and high-contrast variants.
 
 ## Install
 
-1. Open VS Code, go to Extensions (`Ctrl+Shift+X`).
-2. Search for `Lain Theme`.
-3. Click Install, then `Ctrl+K Ctrl+T` to select a theme.
+Go to Extensions
 
-Or install from VSIX:
-Extensions → … → Install from VSIX…
+Click ⋯ (top right)
+
+Click Install from VSIX
+
+Select the .vsix file
 
 ---
 
