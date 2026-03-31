@@ -66,5 +66,3 @@ The generated themes are in `themes/`. Use `F5` in VS Code to test, or copy the 
 - Green — `#55FF55`
 
 All combinations meet WCAG contrast requirements.
-
-All combinations meet WCAG contrast requirements.
