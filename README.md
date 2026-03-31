@@ -40,41 +40,31 @@ cd lain_theme
 npm install
 npm run build
 ```
-The generated themes are in themes/.
-Use F5 in VS Code to test, or copy the folder to ~/.vscode/extensions/.
-Colors
-Base palette (12 colors)
+The generated themes are in `themes/`. Use `F5` in VS Code to test, or copy the folder to `~/.vscode/extensions/`.
 
-Black — (`#0B0B0F`)
+### Colors
 
-Dark purple — (`#1E1A2B`)
+**Base palette (12 colors)**
 
-Purple — (`#322A45`)
+- Black — `#0B0B0F`
+- Dark purple — `#1E1A2B`
+- Purple — `#322A45`
+- Light purple — `#5E4B73`
+- Ghost white — `#F0EAF0`
+- CRT green — `#B5E5B5`
+- Blood red — `#8B2C2C`
+- Dark red — `#5A1E1E`
+- Gray — `#808080`
+- Light gray — `#C0C0C0`
+- Deep blue (light theme) — `#1A1A2E`
 
-Light purple — (`#5E4B73`)
+**High-contrast accents**
 
-Ghost white — (`#F0EAF0`)
+- Neon yellow — `#FFFF00`
+- Pink — `#FF55FF`
+- Red — `#FF5555`
+- Green — `#55FF55`
 
-CRT green — #B5E5B5
-
-Blood red — #8B2C2C
-
-Dark red — #5A1E1E
-
-Gray — #808080
-
-Light gray — #C0C0C0
-
-Deep blue (light theme) — #1A1A2E
-
-High-contrast accents
-
-Neon yellow — #FFFF00
-
-Pink — #FF55FF
-
-Red — #FF5555
-
-Green — #55FF55
+All combinations meet WCAG contrast requirements.
 
 All combinations meet WCAG contrast requirements.
