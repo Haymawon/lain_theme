@@ -29,40 +29,57 @@ Click Install from VSIX
 Select the .vsix file
 
 ---
+# Build from source
 
-## Build from source
+## 1. Open a terminal and clone the repo:
 
 ```bash
 git clone https://github.com/Haymawon/lain_theme.git
 cd lain_theme
 ```
+## 2. Get the packaging tool
+The only thing you need from npm is @vscode/vsce. Install it locally:
+
 ```bash
 npm install
+```
+This adds it to node_modules. No need for global installs.
+
+## 3. Generate the actual theme files
+The real color definitions are in src/colors.js. Running the build script turns that into three theme JSONs inside themes/.
+
+```bash
 npm run build
 ```
-The generated themes are in `themes/`. Use `F5` in VS Code to test, or copy the folder to `~/.vscode/extensions/`.
+You’ll see output like:
 
-### Colors
+```text
+✨  Generated: .../themes/lain-dark.json
+✨  Generated: .../themes/lain-light.json
+✨  Generated: .../themes/lain-high-contrast.json
+If you want, you can also run node build.js directly.
+```
 
-**Base palette (12 colors)**
+## 4. (Optional) Check contrast
+There’s a validator that makes sure text is readable. Run it if you care about accessibility:
 
-- Black — `#0B0B0F`
-- Dark purple — `#1E1A2B`
-- Purple — `#322A45`
-- Light purple — `#5E4B73`
-- Ghost white — `#F0EAF0`
-- CRT green — `#B5E5B5`
-- Blood red — `#8B2C2C`
-- Dark red — `#5A1E1E`
-- Gray — `#808080`
-- Light gray — `#C0C0C0`
-- Deep blue (light theme) — `#1A1A2E`
+```bash
+npm run validate
+```
+It spits out contrast ratios and tells you if anything fails.
 
-**High-contrast accents**
+## 5. Package it
+Now turn it into a .vsix file:
 
-- Neon yellow — `#FFFF00`
-- Pink — `#FF55FF`
-- Red — `#FF5555`
-- Green — `#55FF55`
+```bash
+npm run package
+```
+This runs vsce package under the hood. You’ll end up with something like lain-theme-2.0.0.vsix in the current folder.
 
-All combinations meet WCAG contrast requirements.
+## 6. Install the theme in VS Code
+From the same directory, run:
+
+```bash
+code --install-extension lain-theme-2.0.0.vsix
+```
+Restart VS Code, then go to File > Preferences > Color Theme and pick one of the Lain themes.
