@@ -1,34 +1,40 @@
-const fs=require('fs'),path=require('path');
-const colors=require('../src/colors.js');
+const fs = require('fs');
+const path = require('path');
+const colors = require('../src/colors.js');
 
-// let's generate themes, ugly but works
-function build(){
-	const themes={
-		dark:colors.dark,
-		light:colors.light,
-		highContrast:colors.highContrast
-	};
-	// map internal names to desired filenames
-	const nameMap = {
-		dark: 'dark',
-		light: 'light',
-		highContrast: 'high-contrast'
-	};
-	for(let [name,def] of Object.entries(themes)){
-		let themeJson={
-			name:`Lain (${name==='highContrast'?'High Contrast':name.charAt(0).toUpperCase()+name.slice(1)})`,
-			type:name==='highContrast'?'hc':name,
-			colors:{},
-			tokenColors:[]
-		};
-		// map ui colors
-		Object.assign(themeJson.colors,def.ui);
-		// token colors
-		themeJson.tokenColors=def.tokens;
-		// write file with mapped name
-		let outPath=path.join(__dirname,'..','themes',`lain-theme-${nameMap[name]}.json`);
-		fs.writeFileSync(outPath,JSON.stringify(themeJson,null,4));
-		console.log(`wrote ${outPath}`);
-	}
+// ----------------------------------------------------------------------
+//  Generates VS Code theme files from the color definitions above.
+// ----------------------------------------------------------------------
+
+const THEMES = {
+  dark:         { def: colors.dark,         nameSuffix: 'Dark' },
+  light:        { def: colors.light,        nameSuffix: 'Light' },
+  highContrast: { def: colors.highContrast, nameSuffix: 'High Contrast' }
+};
+
+const OUTPUT_DIR = path.join(__dirname, '..', 'themes');
+const FILENAME_MAP = {
+  dark:         'lain-dark.json',
+  light:        'lain-light.json',
+  highContrast: 'lain-high-contrast.json'
+};
+
+// Ensure output directory exists
+if (!fs.existsSync(OUTPUT_DIR)) {
+  fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 }
-build();
+
+for (const [key, { def, nameSuffix }] of Object.entries(THEMES)) {
+  const themeJson = {
+    name: `Lain (${nameSuffix})`,
+    type: key === 'highContrast' ? 'hc' : key,
+    colors: { ...def.ui },
+    tokenColors: def.tokens
+  };
+
+  const outPath = path.join(OUTPUT_DIR, FILENAME_MAP[key]);
+  fs.writeFileSync(outPath, JSON.stringify(themeJson, null, 2));
+  console.log(`✨  Generated: ${outPath}`);
+}
+
+console.log('\nAll themes built.');
