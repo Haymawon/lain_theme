@@ -55,11 +55,46 @@ Themes are written to themes/lain-dark.json, themes/lain-light.json, themes/lain
 ### Recommended settings
 Add to settings.json:
 ```
-json
-{
-  "workbench.colorTheme": "Lain (Dark)",
-  "editor.fontFamily": "Fira Code, Consolas, monospace",
-  "editor.fontLigatures": true
+ "workbench.colorTheme": "Lain (Dark)",
+  
+  // ----- Custom Fonts (from assets/fonts) -----
+  // After installing the font files, use the exact font family name.
+  // Placeholders: "LainFont-Regular", "LainMono", "LainCode"
+  "editor.fontFamily": "JetBrainsMonoNL Nerd Font Propo",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 14,
+  "editor.lineHeight": 1.6,
+  "editor.letterSpacing": 0.5,
+  
+  // ----- Terminal font (optional) -----
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font Mono",
+  "terminal.integrated.fontSize": 13,
+  
+  // ----- Editor enhancements -----
+  "editor.cursorStyle": "line",
+  "editor.cursorBlinking": "phase",
+  "editor.renderWhitespace": "boundary",
+  "editor.renderLineHighlight": "all",
+  "editor.smoothScrolling": true,
+  "editor.minimap.enabled": false,
+  "editor.scrollBeyondLastLine": false,
+  
+  // ----- Workbench appearance -----
+  "workbench.iconTheme": "vscode-celestial-magic-girl-icon-theme",   // or your preferred icon theme
+  "workbench.tree.indent": 16,
+  "workbench.startupEditor": "none",
+  
+  // ----- Files & Explorer -----
+  "files.autoSave": "onFocusChange",
+  
+  // ----- Breadcrumbs -----
+  "breadcrumbs.enabled": true,
+  "breadcrumbs.filePath": "on",
+  
+  // ----- Extras -----
+  "editor.guides.bracketPairs": true,
+  "editor.guides.indentation": true,
+  "editor.matchBrackets": "always"
 }
 ```
 License
