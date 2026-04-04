@@ -16,7 +16,17 @@ Dark, light, and high-contrast variants.
 ### High Contrast
 ![High contrast preview](assets/preview-hc.png)
 
----
+## Installation
+
+### Install from VSIX file (no build required)
+
+Download `lain-theme-2.3.0.vsix` and run:
+
+```bash
+code --install-extension lain-theme-2.3.0.vsix
+```
+
+Restart VS Code and select the theme via File > Preferences > Color Theme (Ctrl+K Ctrl+T).
 
 
 # Build from source
