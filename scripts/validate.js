@@ -1,17 +1,31 @@
 const fs = require('fs');
 const path = require('path');
 
-// ----------------------------------------------------------------------
-//  Checks contrast ratios against WCAG 2.1 guidelines.
-// ----------------------------------------------------------------------
+const WCAG_NORMAL = 4.5;
+const WCAG_LARGE = 3.0;
 
-const WCAG_AA_NORMAL = 4.5;
-const WCAG_AA_LARGE  = 3.0;
-
-function parseHex(hex) {
-  const match = hex.match(/[0-9a-f]{2}/gi);
-  if (!match || match.length < 3) throw new Error(`Invalid hex color: ${hex}`);
-  return match.map(x => parseInt(x, 16));
+function parseColor(color) {
+  if (color.startsWith('#')) {
+    const hex = color.slice(1);
+    let r, g, b;
+    if (hex.length === 3) {
+      r = parseInt(hex[0] + hex[0], 16);
+      g = parseInt(hex[1] + hex[1], 16);
+      b = parseInt(hex[2] + hex[2], 16);
+    } else if (hex.length === 6) {
+      r = parseInt(hex.slice(0,2), 16);
+      g = parseInt(hex.slice(2,4), 16);
+      b = parseInt(hex.slice(4,6), 16);
+    } else {
+      throw new Error(`Unknown hex format: ${color}`);
+    }
+    return [r, g, b];
+  }
+  const rgba = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*[\d.]+)?\)/i);
+  if (rgba) {
+    return [parseInt(rgba[1]), parseInt(rgba[2]), parseInt(rgba[3])];
+  }
+  throw new Error(`Unsupported color format: ${color}`);
 }
 
 function luminance(r, g, b) {
@@ -22,70 +36,49 @@ function luminance(r, g, b) {
   return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
 }
 
-function contrastRatio(color1, color2) {
-  const [r1, g1, b1] = parseHex(color1);
-  const [r2, g2, b2] = parseHex(color2);
-  const l1 = luminance(r1, g1, b1);
-  const l2 = luminance(r2, g2, b2);
-  const lighter = Math.max(l1, l2);
-  const darker = Math.min(l1, l2);
-  return (lighter + 0.05) / (darker + 0.05);
+function contrast(c1, c2) {
+  const [r1,g1,b1] = parseColor(c1);
+  const [r2,g2,b2] = parseColor(c2);
+  const l1 = luminance(r1,g1,b1);
+  const l2 = luminance(r2,g2,b2);
+  const light = Math.max(l1, l2);
+  const dark = Math.min(l1, l2);
+  return (light + 0.05) / (dark + 0.05);
 }
 
-function checkPair(foreground, background, label, requiredRatio = WCAG_AA_NORMAL) {
-  const ratio = contrastRatio(foreground, background);
-  const passed = ratio >= requiredRatio;
-  const emoji = passed ? '✅' : '❌';
-  console.log(`   ${label}: ${ratio.toFixed(2)} ${emoji} ${passed ? '' : `(needs ${requiredRatio.toFixed(1)})`}`);
-  return passed;
+function testPair(fg, bg, label, required = WCAG_NORMAL) {
+  const ratio = contrast(fg, bg);
+  const ok = ratio >= required;
+  console.log(`  ${label}: ${ratio.toFixed(2)} ${ok ? '✔' : '✘'}${!ok ? ` (need ${required})` : ''}`);
+  return ok;
 }
 
-function validateTheme(filePath) {
-  console.log(`\n📄  ${path.basename(filePath)}`);
-  const theme = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+function validate(file) {
+  console.log(`\n${path.basename(file)}`);
+  const theme = JSON.parse(fs.readFileSync(file));
   const bg = theme.colors['editor.background'];
   const fg = theme.colors['editor.foreground'];
-
-  if (!bg || !fg) {
-    console.warn('   ⚠️  Missing editor.background or editor.foreground');
-    return;
-  }
-
-  console.log(`   Background: ${bg}`);
-  console.log(`   Foreground: ${fg}`);
-  checkPair(fg, bg, 'Editor text');
-
-  // Additional checks – feel free to extend
+  if (!bg || !fg) return console.warn('  missing editor bg/fg');
+  console.log(`  bg: ${bg}  fg: ${fg}`);
+  testPair(fg, bg, 'text');
   const checks = [
     ['editor.lineNumber.foreground', bg],
     ['editorCursor.foreground', bg],
-    ['editor.selectionBackground', bg, WCAG_AA_LARGE],
-    ['list.activeSelectionBackground', bg, WCAG_AA_LARGE],
-    ['statusBar.foreground', theme.colors['statusBar.background']],
+    ['editor.selectionBackground', bg, WCAG_LARGE],
+    ['list.activeSelectionBackground', bg, WCAG_LARGE],
+    ['statusBar.foreground', theme.colors['statusBar.background']]
   ];
-
-  for (const [key, bgColor, minRatio = WCAG_AA_NORMAL] of checks) {
+  for (const [key, bgColor, min = WCAG_NORMAL] of checks) {
     const col = theme.colors[key];
-    if (col && bgColor) {
-      checkPair(col, bgColor, key, minRatio);
-    }
+    if (col && bgColor) testPair(col, bgColor, key, min);
   }
 }
 
-// ----------------------------------------------------------------------
-//  Run on all generated theme files
-// ----------------------------------------------------------------------
-const themeDir = path.join(__dirname, '..', 'themes');
+const themeDir = path.join(__dirname, '../themes');
 if (!fs.existsSync(themeDir)) {
-  console.error('❌  themes/ directory not found. Run build.js first.');
+  console.error('❌ themes/ missing. Run `node build.js` first.');
   process.exit(1);
 }
-
-const themeFiles = fs.readdirSync(themeDir).filter(f => f.endsWith('.json'));
-if (themeFiles.length === 0) {
-  console.warn('⚠️  No theme JSON files found in themes/');
-} else {
-  for (const file of themeFiles) {
-    validateTheme(path.join(themeDir, file));
-  }
-}
+const files = fs.readdirSync(themeDir).filter(f => f.endsWith('.json'));
+if (!files.length) console.warn('⚠️ No theme JSONs found.');
+else files.forEach(f => validate(path.join(themeDir, f)));
