@@ -18,26 +18,6 @@ Dark, light, and high-contrast variants.
 
 ---
 
-# Lain Theme
-
-Serial Experiments Lain inspired theme for VS Code.  
-Dark, light, and high-contrast variants.
-
----
-
-## Preview
-
-### Dark
-![Dark preview](assets/preview-dark.png)
-
-### Light
-![Light preview](assets/preview-light.png)
-
-### High Contrast
-![High contrast preview](assets/preview-hc.png)
-
----
-
 
 # Build from source
 Prerequisites: Node.js (v14 or later), Git.
