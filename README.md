@@ -72,6 +72,50 @@ Add to settings.json:
 "editor.matchBrackets": "always"
 ```
 
+# Check for Updates
+
+The extension has a manual update check. Run it to see if a newer version is out.
+
+## How to use
+Open VS Code.
+
+Open the Command Palette:
+
+Windows/Linux: `Ctrl + Shift + P`
+
+Mac: `Cmd + Shift + P`
+
+Type `Lain: Check for Updates` and press Enter.
+
+The extension will tell you if an update exists.
+
+## Warning
+Don't run `Lain: Check for Updates` **inside a terminal or command prompt.** It's a **VS Code command, not a system command.**
+
+This will not work:
+
+`C:\Users\username>Lain: Check for Updates`
+That just gives an error. Run it **only from VS Code's Command Palette.**
+
+## How to update
+If a newer version is available:
+
+Download the latest `.vsix` file from the project's releases page.
+
+Then install it in VS Code:
+
+### Option 1 — Command Palette
+
+Open Command Palette `(Ctrl+Shift+P)` choose Extensions: Install from VSIX, and pick the downloaded file.
+
+### Option 2 — Terminal
+Run this in your terminal:
+
+`code --install-extension extension-name.vsix`
+The new version will replace the old one automatically.
+
+
+
 # Build from source
 Prerequisites: Node.js (v14 or later), Git.
 
