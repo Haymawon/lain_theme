@@ -96,4 +96,4 @@ node build.js
 Themes are written to themes/lain-dark.json, themes/lain-light.json, themes/lain-high-contrast.json. Copy them manually if needed.
 
 License
-[AGPL-3.0 License.](https://github.com/Haymawon/lain_theme/blob/main/LICENSE)
+[GPL-3.0 License.](https://github.com/Haymawon/lain_theme/blob/main/LICENSE)
