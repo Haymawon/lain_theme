@@ -40,15 +40,24 @@
         "uiTheme": "hc-black",
         "path": "./themes/lain-high-contrast.json"
       }
-    ]
+    ],
+    "commands": [{
+        "command": "lain.checkForUpdates",
+        "title": "Lain: Check for Updates"
+    }]
   },
   "scripts": {
-    "build": "node build.js",
+    "build": "node scripts/build.js",
+    "compile": "tsc -p .",
     "package": "vsce package",
-    "validate": "node validate.js",
+    "validate": "node scripts/validate.js",
     "publish": "vsce publish"
   },
+  "main": "./out/extension.js",
   "devDependencies": {
-    "@vscode/vsce": "^2.22.0"
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.74.0",
+    "@vscode/vsce": "^2.22.0",
+    "typescript": "^5.0.0"
   }
 }
