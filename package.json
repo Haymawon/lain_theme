@@ -2,28 +2,18 @@
   "name": "lain-theme",
   "displayName": "Lain",
   "description": "Serial Experiments Lain inspired theme for VS Code.",
-  "version": "2.0.0",
+  "version": "2.3.1",
   "publisher": "Haymawon",
   "engines": {
     "vscode": "^1.74.0"
   },
-  "categories": [
-    "Themes"
-  ],
+  "categories": ["Themes"],
   "icon": "assets/icon.png",
   "galleryBanner": {
     "color": "#0A0A14",
     "theme": "dark"
   },
-  "keywords": [
-    "lain",
-    "serial experiments lain",
-    "dark theme",
-    "purple",
-    "neon",
-    "cyberpunk",
-    "ethereal"
-  ],
+  "keywords": ["lain", "serial experiments lain", "dark theme", "purple", "neon", "cyberpunk", "glass"],
   "repository": {
     "type": "git",
     "url": "https://github.com/Haymawon/lain_theme.git"
@@ -32,7 +22,7 @@
     "url": "https://github.com/Haymawon/lain_theme/issues"
   },
   "homepage": "https://github.com/Haymawon/lain_theme",
-  "license": "MIT",
+  "license": "GPL-3.0-only",
   "contributes": {
     "themes": [
       {
