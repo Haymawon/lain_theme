@@ -38,7 +38,7 @@ cd lain_theme
 npm install          # installs @vscode/vsce
 node build.js        # generates theme JSON files in themes/
 node validate.js     # (optional) checks contrast ratios
-npx vsce package     # creates lain-theme-2.3.0.vsix
+npx vsce package     # creates lain-theme vsix
 ```
 Then install the .vsix as shown above.
 
