@@ -23,7 +23,7 @@ Dark, light, and high-contrast variants.
 Download [lain-theme-(version).vsix](https://github.com/Haymawon/lain_theme/releases/tag/v2.3.2) and run:
 
 ```bash
-code --install-extension lain-theme-2.3.1.vsix
+code --install-extension lain-theme-(version).vsix
 ```
 
 Restart VS Code and select the theme via File > Preferences > Color Theme (Ctrl+K Ctrl+T).
