@@ -20,7 +20,7 @@ Dark, light, and high-contrast variants.
 
 ### Install from VSIX file (no build required)
 
-Download [lain-theme-2.3.1.vsix](https://github.com/Haymawon/lain_theme/releases/tag/v2.3.1) and run:
+Download [lain-theme-(version).vsix](https://github.com/Haymawon/lain_theme/releases/tag/v2.3.2) and run:
 
 ```bash
 code --install-extension lain-theme-2.3.1.vsix
